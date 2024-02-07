@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, 
+                 initial-scale=1.0">
+    <title>Read Base64 image</title>
+</head>
+ 
+<body>
+    <input type="file" id="fileInput" />
+    <img src="" id="img"/>
+    <script>
+        document.getElementById('fileInput')
+            .addEventListener('change', (event) => {
+                const file = event.target.files[0];
+                const reader = new FileReader();
+ 
+                reader.onload = function () {
+                    const content = reader.result;
+                    console.log(content);
+                    document.getElementById('img')
+                        .src = 'data:image/png;base64,' + content;
+                };
+ 
+                reader.onerror = function () {
+                    console.error('Error reading the file');
+                };
+ 
+                reader.readAsText(file, 'utf-8');
+            });
+    </script>
+</body>
+ 
+</html>
